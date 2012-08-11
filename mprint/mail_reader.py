@@ -58,6 +58,11 @@ def parse(content):
     body = None
     html = None
     images = []
+    images_content_type = [
+        "image/jpg",
+        "image/png",
+    ]
+
     for part in msgobj.walk():
         print part.get_content_type()
         attachment = parse_attachment(part)
@@ -79,7 +84,7 @@ def parse(content):
                 part.get_content_charset(),
                 'replace'
             ).encode('utf8','replace')
-        elif part.get_content_type() == "image/jpg":
+        elif part.get_content_type() in images_content_type:
             images.append(StringIO(part.get_payload(decode=True)))
 
     return {
