@@ -73,6 +73,7 @@ def parse(content):
         "image/jpg",
         "image/jpeg",
         "image/png",
+        "image/tiff"
         "application/pdf",
     ]
 
