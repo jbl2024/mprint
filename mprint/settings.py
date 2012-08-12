@@ -15,6 +15,5 @@ TEMP_DIRECTORY = '/tmp'
 PRINT_COMMAND = 'echo "not supported"'
 PRINT_DIRECTORY = os.path.join(PROJECT_ROOT, 'jobs')
 
-if sys.platform == 'darwin':
-    PRINT_COMMAND = 'lp'
-    PRINT_OPTIONS = '-o media=A4'
+PRINT_COMMAND = 'lp'
+PRINT_OPTIONS = '-o media=A4'
