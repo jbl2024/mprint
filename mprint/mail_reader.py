@@ -1,3 +1,11 @@
+"""
+
+Mail reader functions
+
+Adapted from
+ * http://www.ianlewis.org/en/parsing-email-attachments-python
+ * http://stackoverflow.com/questions/1225586/checking-email-with-python
+"""
 import poplib
 from email.Header import decode_header
 from email.Parser import Parser as EmailParser
