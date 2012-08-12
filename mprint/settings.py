@@ -7,9 +7,9 @@ LOG_DIRECTORY = os.path.join(PROJECT_ROOT, 'logs/')
 LOG_FILENAME = os.path.join(LOG_DIRECTORY, 'mprint.log')
 
 # mail server
-MAIL_HOST = 'ssl0.ovh.net'
-MAIL_USER = 'print@blondon.fr'
-MAIL_PASSWORD = 'MbrRP7u9'
+MAIL_HOST = '' # INSERT MAIL HOST
+MAIL_USER = '' # INSERT MAIL USER
+MAIL_PASSWORD = '' # INSERT MAIL PASSWORD
 
 TEMP_DIRECTORY = '/tmp'
 PRINT_COMMAND = 'echo "not supported"'
