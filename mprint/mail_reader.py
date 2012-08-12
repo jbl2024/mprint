@@ -6,8 +6,10 @@ from StringIO import StringIO
 
 from settings import MAIL_HOST, MAIL_USER, MAIL_PASSWORD
 
+
 class NotSupportedMailFormat(Exception):
     pass
+
 
 def parse_attachment(message_part):
     content_disposition = message_part.get("Content-Disposition", None)
@@ -25,20 +27,21 @@ def parse_attachment(message_part):
             attachment.read_date = None
 
             for param in dispositions[1:]:
-                name,value = param.split("=")
+                name, value = param.split("=")
                 name = name.lower()
 
                 if name == "filename":
                     attachment.name = value
                 elif name == "create-date":
-                    attachment.create_date = value  #TODO: datetime
+                    attachment.create_date = value  # TODO: datetime
                 elif name == "modification-date":
-                    attachment.mod_date = value #TODO: datetime
+                    attachment.mod_date = value  # TODO: datetime
                 elif name == "read-date":
-                    attachment.read_date = value #TODO: datetime
+                    attachment.read_date = value  # TODO: datetime
             return attachment
 
     return None
+
 
 def parse(content):
     p = EmailParser()
@@ -46,9 +49,9 @@ def parse(content):
     if msgobj['Subject'] is not None:
         decodefrag = decode_header(msgobj['Subject'])
         subj_fragments = []
-        for s , enc in decodefrag:
+        for s, enc in decodefrag:
             if enc:
-                s = unicode(s , enc).encode('utf8','replace')
+                s = unicode(s , enc).encode('utf8', 'replace')
             subj_fragments.append(s)
         subject = ''.join(subj_fragments)
     else:
@@ -75,7 +78,7 @@ def parse(content):
                 part.get_payload(decode=True),
                 part.get_content_charset(),
                 'replace'
-            ).encode('utf8','replace')
+            ).encode('utf8', 'replace')
         elif part.get_content_type() == "text/html":
             if html is None:
                 html = ""
@@ -83,19 +86,20 @@ def parse(content):
                 part.get_payload(decode=True),
                 part.get_content_charset(),
                 'replace'
-            ).encode('utf8','replace')
+            ).encode('utf8', 'replace')
         elif part.get_content_type() in images_content_type:
             images.append(StringIO(part.get_payload(decode=True)))
 
     return {
-        'subject' : subject,
-        'body' : body,
-        'html' : html,
-        'from' : parseaddr(msgobj.get('From'))[1],
-        'to' : parseaddr(msgobj.get('To'))[1],
+        'subject': subject,
+        'body': body,
+        'html': html,
+        'from': parseaddr(msgobj.get('From'))[1],
+        'to': parseaddr(msgobj.get('To'))[1],
         'attachments': attachments,
         'images': images,
     }
+
 
 def get_mails():
     pop_conn = poplib.POP3_SSL(MAIL_HOST)
