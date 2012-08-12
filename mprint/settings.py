@@ -17,3 +17,5 @@ PRINT_DIRECTORY = os.path.join(PROJECT_ROOT, 'jobs')
 
 PRINT_COMMAND = 'lp'
 PRINT_OPTIONS = '-o media=A4'
+
+WAIT_DELAY = 60 # in seconds
