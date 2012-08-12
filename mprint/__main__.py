@@ -7,11 +7,16 @@ execfile(activate_this, dict(__file__=activate_this))
 
 from logger import Logger
 from mail_reader import get_mails
+from printer import print_images
 log = Logger().log
 
 log.info('welcome to mprint')
 log.info('retrieving mails')
 
-get_mails()
+mails = get_mails()
+for mail in mails:
+    images = mail.get('images')
+    if images:
+        print_images(images)
 
 log.info('done')

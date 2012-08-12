@@ -63,7 +63,9 @@ def parse(content):
     images = []
     images_content_type = [
         "image/jpg",
+        "image/jpeg",
         "image/png",
+        "application/pdf",
     ]
 
     for part in msgobj.walk():
@@ -111,6 +113,9 @@ def get_mails():
     messages = ["\n".join(mssg[1]) for mssg in messages]
     #Parse message intom an email object:
     messages = [parse(mssg) for mssg in messages]
-    for message in messages:
-        print message
+
+    for i in range(1, len(pop_conn.list()[1]) + 1):
+        pop_conn.dele(i)
+
     pop_conn.quit()
+    return messages
