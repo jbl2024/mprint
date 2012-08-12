@@ -19,11 +19,10 @@ def _print_file(fullpath):
     args = [settings.PRINT_COMMAND]
     args.extend(settings.PRINT_OPTIONS.split(" "))
     args.append(fullpath)
-    print args
     p = sub.Popen(args, stdout=sub.PIPE, stderr=sub.PIPE)
     output, errors = p.communicate()
-    print output
-    print errors
+    log.debug(output)
+    log.debug(errors)
     if len(errors) == 0:
         return False
     return True
